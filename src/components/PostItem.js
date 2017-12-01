@@ -7,11 +7,11 @@ export default class PostItem extends React.Component {
     };
   }
   handleChange = event => {
-    this.state.post = {
+    let newPost = {
       ...this.state.post,
       [event.target.name]: event.target.value
     };
-    this.setState({ post: this.state.post });
+    this.setState({ post: newPost});
   };
   onEditPost = () => {
     this.setState({
@@ -56,7 +56,7 @@ export default class PostItem extends React.Component {
         </td>
         <td>
           <button
-            class="btn"
+            className="btn"
             onClick={e => {
               this.props.onRemovePost(this.props.post);
             }}
@@ -66,11 +66,11 @@ export default class PostItem extends React.Component {
         </td>
         <td>
           {this.state.editMode ? (
-            <button class="btn" onClick={this.onUpdatePost}>
+            <button className="btn" onClick={this.onUpdatePost}>
               Save
             </button>
           ) : (
-            <button class="btn" onClick={this.onEditPost}>
+            <button className="btn" onClick={this.onEditPost}>
               Edit
             </button>
           )}

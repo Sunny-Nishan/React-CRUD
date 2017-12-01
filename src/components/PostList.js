@@ -5,14 +5,15 @@ export default class PostList extends React.Component {
     console.log("rendered");
     console.log(this.props.postList);
     return (
-      <table class="responstable">
+      <table className="responstable">
+        <tbody>
+        
         <tr>
           <th>Title</th>
           <th>Content</th>
           <th>Remove</th>
           <th>Update</th>
         </tr>
-
         {this.props.postList.map(post => {
           return (
             <PostItem
@@ -24,6 +25,7 @@ export default class PostList extends React.Component {
             />
           );
         })}
+        </tbody>
       </table>
     );
   }

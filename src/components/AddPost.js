@@ -9,15 +9,17 @@ export default class AddPost extends React.Component {
   }
   handleSubmit = e => {
     e.preventDefault();
-    const post = {
-      title: e.target.title.value,
-      content: e.target.content.value
-    };
-    this.props.handleSubmit(post);
-    this.setState({
-      title: "",
-      content: ""
-    });
+    if (e.target.title.value) {
+      const post = {
+        title: e.target.title.value,
+        content: e.target.content.value
+      };
+      this.props.handleSubmit(post);
+      this.setState({
+        title: "",
+        content: ""
+      });
+    }
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });

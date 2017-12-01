@@ -9,29 +9,17 @@ export default class AddPost extends React.Component {
   }
   handleSubmit = e => {
     e.preventDefault();
-    console.log("edit mode " + this.editMode);
     const post = {
       title: e.target.title.value,
       content: e.target.content.value
     };
-    if (this.editMode) {
-      post.postId = this.props.editPost.postId;
-    }
     this.props.handleSubmit(post);
-
     this.setState({
       title: "",
       content: ""
     });
-    this.editMode = undefined;
   };
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.editPost && nextProps.editPost.postId) {
-      this.editMode = true;
-      this.setState(nextProps.editPost);
-    }
-  }
-  handleChange = event => {
+handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
   render() {

@@ -57,6 +57,7 @@ class App extends Component {
           postList={this.state.postList}
           onRemovePost={this.onRemovePost}
           onEditPost={this.onEditPost}
+          onUpdatePost={this.onCreateOrUpdatePost}
         />
         <AddPost editPost={this.state.postList.filter(post =>{    
             return post.postId === this.state.editId

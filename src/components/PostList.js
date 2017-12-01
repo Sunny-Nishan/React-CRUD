@@ -7,24 +7,23 @@ export default class PostList extends React.Component {
     return (
       <table className="responstable">
         <tbody>
-        
-        <tr>
-          <th>Title</th>
-          <th>Content</th>
-          <th>Remove</th>
-          <th>Update</th>
-        </tr>
-        {this.props.postList.map(post => {
-          return (
-            <PostItem
-              key={post.postId}
-              onEditPost={this.props.onEditPost}
-              onRemovePost={this.props.onRemovePost}
-              post={post}
-              onUpdatePost={this.props.onUpdatePost}
-            />
-          );
-        })}
+          <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Remove</th>
+            <th>Update</th>
+          </tr>
+          {Object.keys(this.props.postList).map(key => {
+            let post = this.props.postList[key];
+            return (
+              <PostItem
+                key={post.postId}
+                onRemovePost={this.props.onRemovePost}
+                post={post}
+                onUpdatePost={this.props.onUpdatePost}
+              />
+            );
+          })}
         </tbody>
       </table>
     );

@@ -8,42 +8,30 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      postList: []
+      postList: {}
     };
   }
   onCreateOrUpdatePost = post => {
-    let newPostList = [];
+    let newPostList = {};
     if (post.postId) {
-      this.state.postList.forEach(p => {
-        if (p.postId === post.postId) {
-          newPostList.push(post);
-        } else {
-          newPostList.push(p);
-        }
-      });
+      newPostList = { ...this.state.postList, [post.postId]:{...post} };
       this.setState({
-        editId: undefined
+        postList: newPostList,
       });
     } else {
       postId++;
-      newPostList = [...this.state.postList];
-      newPostList.push({ ...post, postId });
+      newPostList = { ...this.state.postList, [postId] : { ...post, postId} };
     }
+
     this.setState(prevState => ({
       postList: newPostList
     }));
   };
   onRemovePost = id => {
-    let newPostList = this.state.postList.filter(post => {
-      return post !== id;
-    });
+    let newPostList = {...this.state.postList};
+    delete newPostList[id];
     this.setState({
       postList: newPostList
-    });
-  };
-  onEditPost = id => {
-    this.setState({
-      editId: id
     });
   };
   render() {
@@ -57,15 +45,9 @@ class App extends Component {
         <PostList
           postList={this.state.postList}
           onRemovePost={this.onRemovePost}
-          onEditPost={this.onEditPost}
           onUpdatePost={this.onCreateOrUpdatePost}
         />
         <AddPost
-          editPost={
-            this.state.postList.filter(post => {
-              return post.postId === this.state.editId;
-            })[0]
-          }
           handleSubmit={this.onCreateOrUpdatePost}
         />
       </div>

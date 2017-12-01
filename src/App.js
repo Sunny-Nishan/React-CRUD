@@ -12,25 +12,26 @@ class App extends Component {
     };
   }
   onCreateOrUpdatePost = post => {
-    if(post.postId){
-      let updateIndex = 0;
-      this.state.postList.forEach((p,i) => {
-        if(p.postId === post.postId){
-          updateIndex = i;
+    let newPostList = [];
+    if (post.postId) {
+      this.state.postList.forEach(p => {
+        if (p.postId === post.postId) {
+          newPostList.push(post);
+        } else {
+          newPostList.push(p);
         }
       });
-      this.state.postList.splice(updateIndex, 1, post);
       this.setState({
         editId: undefined
-      })  
-    }else{
+      });
+    } else {
       postId++;
-      this.state.postList.push({ ...post, postId });
+      newPostList = [...this.state.postList];
+      newPostList.push({ ...post, postId });
     }
     this.setState(prevState => ({
-      postList: this.state.postList
+      postList: newPostList
     }));
-    
   };
   onRemovePost = id => {
     let newPostList = this.state.postList.filter(post => {
@@ -40,11 +41,11 @@ class App extends Component {
       postList: newPostList
     });
   };
-  onEditPost = (id) => {
+  onEditPost = id => {
     this.setState({
       editId: id
-    })
-  }
+    });
+  };
   render() {
     return (
       <div className="App">
@@ -59,9 +60,14 @@ class App extends Component {
           onEditPost={this.onEditPost}
           onUpdatePost={this.onCreateOrUpdatePost}
         />
-        <AddPost editPost={this.state.postList.filter(post =>{    
-            return post.postId === this.state.editId
-        })[0]} handleSubmit={this.onCreateOrUpdatePost} />
+        <AddPost
+          editPost={
+            this.state.postList.filter(post => {
+              return post.postId === this.state.editId;
+            })[0]
+          }
+          handleSubmit={this.onCreateOrUpdatePost}
+        />
       </div>
     );
   }

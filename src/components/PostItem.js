@@ -55,7 +55,8 @@ export default class PostItem extends React.Component {
           )}
         </td>
         <td>
-          <button class="btn"
+          <button
+            class="btn"
             onClick={e => {
               this.props.onRemovePost(this.props.post);
             }}
@@ -65,9 +66,13 @@ export default class PostItem extends React.Component {
         </td>
         <td>
           {this.state.editMode ? (
-            <button class="btn" onClick={this.onUpdatePost}>Save</button>
+            <button class="btn" onClick={this.onUpdatePost}>
+              Save
+            </button>
           ) : (
-            <button class="btn" onClick={this.onEditPost}>Edit</button>
+            <button class="btn" onClick={this.onEditPost}>
+              Edit
+            </button>
           )}
         </td>
       </tr>

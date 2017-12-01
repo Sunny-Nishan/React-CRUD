@@ -19,7 +19,7 @@ export default class AddPost extends React.Component {
       content: ""
     });
   };
-handleChange = event => {
+  handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
   render() {
